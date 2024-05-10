@@ -1,20 +1,17 @@
-function zigzagLevelOrder(root) {
-  if (!root) return [];
+function permute(nums) {
   const result = [];
-  const queue = [root];
-  let zigzag = false;
-  while (queue.length) {
-    const levelSize = queue.length;
-    const currentLevel = [];
-    for (let i = 0; i < levelSize; i++) {
-      const node = queue.shift();
-      if (zigzag) currentLevel.unshift(node.val);
-      else currentLevel.push(node.val);
-      if (node.left) queue.push(node.left);
-      if (node.right) queue.push(node.right);
-    }
-    result.push(currentLevel);
-    zigzag = !zigzag;
-  }
+  backtrack([]);
   return result;
+  function backtrack(current) {
+    if (current.length === nums.length) {
+      result.push([...current]);
+      return;
+    }
+    for (const num of nums) {
+      if (current.includes(num)) continue;
+      current.push(num);
+      backtrack(current);
+      current.pop();
+    }
+  }
 }
