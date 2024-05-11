@@ -1,17 +1,10 @@
-function permute(nums) {
+function generateParenthesis(n) {
   const result = [];
-  backtrack([]);
+  backtrack("", 0, 0);
   return result;
-  function backtrack(current) {
-    if (current.length === nums.length) {
-      result.push([...current]);
-      return;
-    }
-    for (const num of nums) {
-      if (current.includes(num)) continue;
-      current.push(num);
-      backtrack(current);
-      current.pop();
-    }
+  function backtrack(current, open, close) {
+    if (current.length === 2 * n) result.push(current);
+    if (open < n) backtrack(current + "(", open + 1, close);
+    if (close < open) backtrack(current + ")", open, close + 1);
   }
 }
