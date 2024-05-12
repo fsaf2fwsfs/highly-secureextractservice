@@ -1,10 +1,17 @@
-function generateParenthesis(n) {
+function levelOrderBottom(root) {
+  if (!root) return [];
   const result = [];
-  backtrack("", 0, 0);
-  return result;
-  function backtrack(current, open, close) {
-    if (current.length === 2 * n) result.push(current);
-    if (open < n) backtrack(current + "(", open + 1, close);
-    if (close < open) backtrack(current + ")", open, close + 1);
+  const queue = [root];
+  while (queue.length) {
+    const levelSize = queue.length;
+    const currentLevel = [];
+    for (let i = 0; i < levelSize; i++) {
+      const node = queue.shift();
+      currentLevel.push(node.val);
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+    }
+    result.unshift(currentLevel);
   }
+  return result;
 }
