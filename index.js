@@ -1,3 +1,1 @@
-function getMin(arr) {
-  return Math.min(...arr);
-}
+console.log("hello world");
